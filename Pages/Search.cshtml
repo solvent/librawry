@@ -1,0 +1,9 @@
+@page
+@model SearchModel
+
+<ul>
+@foreach (var item in @Model.SearchResult)
+{
+	<li>@item</li>
+}
+</ul>
