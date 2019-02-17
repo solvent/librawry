@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using librawry.classes;
+using librawry.classes.entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +13,11 @@ namespace librawry.Pages {
 	public class SearchModel : PageModel {
 		private readonly SqliteContext db;
 
-		public IEnumerable<string> SearchResult {
+		public IEnumerable<Title> SearchResult {
+			get; private set;
+		}
+
+		public string SearchError {
 			get; private set;
 		}
 
@@ -21,10 +26,15 @@ namespace librawry.Pages {
 		}
 
 		public async Task OnGetAsync(string query) {
+			if (string.IsNullOrEmpty(query) || query.Length < 3) {
+				SearchError = "Please use at least 3 characters length string to search.";
+				return;
+			}
 			SearchResult = await db.Titles
+				.Include("TagRefs.Tag")
 				.Where(x => EF.Functions.Like(x.Name, $"%{query}%") ||
 					x.Episodes.Any(y => EF.Functions.Like(y.Name, $"%{query}%")))
-				.Select(x => x.Name)
+				.OrderBy(x => x.Name)
 				.ToListAsync();
 		}
 	}

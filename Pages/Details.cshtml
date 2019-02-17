@@ -1,0 +1,22 @@
+@page
+@model DetailsModel
+
+<h1>
+	@Model.DetailsResult.Name
+</h1>
+
+<code>
+@foreach (var tag in @Model.DetailsResult.TagRefs.Select(x => x.Tag.Name).OrderBy(x => x))
+{
+	<small>@tag</small>
+}
+</code>
+
+<h2>Episodes</h2>
+
+<ul>
+@foreach (var episode in @Model.DetailsResult.Episodes.OrderBy(x => x.Name).Select(x => x.Name))
+{
+	<li>@episode</li>
+}
+</ul>
