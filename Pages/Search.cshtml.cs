@@ -30,10 +30,11 @@ namespace librawry.Pages {
 				SearchError = "Please use at least 3 characters length string to search.";
 				return;
 			}
+			var search = string.Join("%", query.Split(' '));
 			SearchResult = await db.Titles
 				.Include("TagRefs.Tag")
-				.Where(x => EF.Functions.Like(x.Name, $"%{query}%") ||
-					x.Episodes.Any(y => EF.Functions.Like(y.Name, $"%{query}%")))
+				.Where(x => EF.Functions.Like(x.Name, $"%{search}%") ||
+					x.Episodes.Any(y => EF.Functions.Like(y.Name, $"%{search}%")))
 				.OrderBy(x => x.Name)
 				.ToListAsync();
 		}
