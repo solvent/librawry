@@ -1,19 +1,25 @@
 @page
 @model SearchModel
 
-<ul>
-@foreach (var item in @Model.SearchResult)
-{
-	<li>
-		<a href="/Details?id=@item.Id">@item.Name</a>
+@if (@Model.SearchResult != null) {
+	<ul>
+	@foreach (var item in @Model.SearchResult)
+	{
+		<li>
+			<a href="/Details?id=@item.Id">@item.Name</a>
+			<br>
+			<code>
+			@foreach (var tag in item.TagRefs.Select(x => x.Tag.Name).OrderBy(x => x))
+			{
+				<small>@tag</small>
+			}
+			</code>
+		</li>
 		<br>
-		<code>
-		@foreach (var tag in item.TagRefs.Select(x => x.Tag.Name).OrderBy(x => x))
-		{
-			<small>@tag</small>
-		}
-		</code>
-	</li>
-	<br>
+	}
+	</ul>
 }
-</ul>
+
+@if (!string.IsNullOrEmpty(@Model.SearchError)) {
+	<p>@Model.SearchError</p>
+}
