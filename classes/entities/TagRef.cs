@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace librawry.classes.entities {
 
 	public class TagRef {
