@@ -1,4 +1,4 @@
-using librawry.classes;
+using librawry.portable;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +17,7 @@ namespace librawry {
 			services.AddRazorPages();
 
 			var cons = Configuration.GetConnectionString("SqliteDatabase");
-			services.AddDbContext<SqliteContext>(options => options.UseSqlite(cons));
+			services.AddDbContext<LibrawryContext>(options => options.UseSqlite(cons));
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {

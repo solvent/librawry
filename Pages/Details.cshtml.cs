@@ -1,16 +1,16 @@
 using System.Linq;
 using System.Threading.Tasks;
-using librawry.classes;
-using librawry.classes.entities;
+using librawry.portable;
+using librawry.portable.entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace librawry.Pages {
 	public class DetailsModel : PageModel {
-		private readonly SqliteContext db;
+		private readonly LibrawryContext db;
 
-		public DetailsModel(SqliteContext db) {
+		public DetailsModel(LibrawryContext db) {
 			this.db = db;
 		}
 

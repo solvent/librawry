@@ -1,15 +1,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using librawry.classes;
-using librawry.classes.entities;
+using librawry.portable;
+using librawry.portable.entities;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace librawry.Pages {
 
 	public class SearchModel : PageModel {
-		private readonly SqliteContext db;
+		private readonly LibrawryContext db;
 
 		public IEnumerable<Title> SearchResult {
 			get; private set;
@@ -19,7 +19,7 @@ namespace librawry.Pages {
 			get; private set;
 		}
 
-		public SearchModel(SqliteContext db) {
+		public SearchModel(LibrawryContext db) {
 			this.db = db;
 		}
 
