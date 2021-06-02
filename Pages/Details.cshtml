@@ -14,7 +14,7 @@
 
 <h2>Episodes</h2>
 
-<ul>
+<ul class="episodes-list">
 @foreach (var episode in @Model.DetailsResult.Episodes.OrderBy(x => x.Name).Select(x => x.Name))
 {
 	<li>@episode</li>

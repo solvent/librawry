@@ -1,25 +1,30 @@
 @page
 @model SearchModel
 
-@if (@Model.SearchResult != null) {
-	<ul>
-	@foreach (var item in @Model.SearchResult)
-	{
-		<li>
-			<a href="/Details?id=@item.Id">@item.Name</a>
-			<br>
-			<code>
-			@foreach (var tag in item.TagRefs.Select(x => x.Tag.Name).OrderBy(x => x))
-			{
-				<small>@tag</small>
-			}
-			</code>
-		</li>
-		<br>
+@if (string.IsNullOrEmpty(@Model.SearchError)) {
+	<h2>Search results for &ldquo; @Model.SearchText &rdquo;</h2>
+	@if (@Model.SearchResult.Any()) {
+		<ul class="search-results">
+		@foreach (var item in @Model.SearchResult)
+		{
+			<li>
+				<a href="/Details?id=@item.Id">@item.Name</a>
+				<code>
+				@foreach (var tag in item.TagRefs.Select(x => x.Tag.Name).OrderBy(x => x))
+				{
+					<small>@tag</small>
+				}
+				</code>
+			</li>
+		}
+		</ul>
 	}
-	</ul>
+	else
+	{
+		<p>Nothing is found</p>
+	}
 }
 
 @if (!string.IsNullOrEmpty(@Model.SearchError)) {
-	<p>@Model.SearchError</p>
+	<p id="search_error">@Model.SearchError</p>
 }

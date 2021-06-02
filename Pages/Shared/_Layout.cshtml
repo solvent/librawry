@@ -1,24 +1,45 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Librawry</title>
 	<style>
-		body { color: #657b83; background-color: #fdf6e3; }
+		* { margin: 0; padding: 0; box-sizing: border-box; }
+		body { color: #657b83; background-color: #fdf6e3; margin: 8px; font-size: 16px; }
 		a, a:active, a:link, a:visited, a:hover { color: #268bd2; }
-		code { color: #d33682; }
-		code > small { background-color: #eee8d5; }
-		h1, h2 { color: #586e75; }
+		code { color: #d33682; display: block; }
+		code > small { background-color: #eee8d5; padding: 0 4px; }
+		small { font-size: 12px; }
+		h1, h2 { color: #586e75; margin-block-start: 8px; }
+		*:focus { outline: #d33682 2px dashed; outline-offset: 2px; }
+		input[type="search"], button, label { margin-right: 4px; line-height: 24px; }
+		input[type="search"], button { border: #657b83 1px solid; padding: 0 4px; }
+		ul { margin-block-start: 8px; margin-block-end: 8px; }
+		ul.search-results { list-style-type: none; }
+		ul.search-results li { margin-bottom: 8px; }
+		ul.search-results li > a { margin-bottom: 4px; }
+		ul.episodes-list { list-style-type: disc; padding-inline-start: 16px; }
+		ul.episodes-list li { margin-bottom: 8px; overflow-wrap: break-word; }
+		p { margin-block-start: 16px; margin-block-end: 16px; }
+		.skipnav { margin-bottom: 8px; }
+		.skipnav a { position: absolute; left: -10px; width: 0; height: 0; overflow: hidden; }
+		.skipnav a:focus, .skipnav a:active { position: static; left: 0; width: auto; height: auto; overflow: visible; }
 	</style>
 </head>
 <body>
+	<div class="skipnav"><a href="#main">Skip to main content</a></div>
 
-	<form action="/Search" method="GET" autocomplete="off">
-		<input class="input" type="text" name="query" placeholder="Search" autofocus="true">
-		<input type="submit" value="Find">
-	</form>
+	<header role="banner">
+		<form action="/search" method="GET" role="search">
+			<label for="query">Search</label>
+			<input type="search" id="query" name="query" aria-describedby="search_error">
+			<button>Find</button>
+		</form>
+	</header>
 
+	<div id="main" role="main">
 	@RenderBody()
+	</div>
 </body>
 </html>

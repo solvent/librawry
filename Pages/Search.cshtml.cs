@@ -11,6 +11,10 @@ namespace librawry.Pages {
 	public class SearchModel : PageModel {
 		private readonly LibrawryContext db;
 
+		public string SearchText {
+			get; private set;
+		}
+
 		public IEnumerable<Title> SearchResult {
 			get; private set;
 		}
@@ -28,6 +32,7 @@ namespace librawry.Pages {
 				SearchError = "Please use at least 3 characters length string to search.";
 				return;
 			}
+			SearchText = query;
 			var search = string.Join("%", query.Split(' '));
 			SearchResult = await db.Titles
 				.Include("TagRefs.Tag")
