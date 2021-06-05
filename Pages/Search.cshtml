@@ -2,7 +2,7 @@
 @model SearchModel
 
 @if (string.IsNullOrEmpty(@Model.SearchError)) {
-	<h2>Search results for &ldquo; @Model.SearchText &rdquo;</h2>
+	<h1>Search results for &ldquo; @Model.SearchText &rdquo;</h1>
 	@if (@Model.SearchResult.Any()) {
 		<ul class="search-results">
 		@foreach (var item in @Model.SearchResult)
