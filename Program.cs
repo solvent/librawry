@@ -9,8 +9,14 @@ builder.Services.AddDbContext<LibrawryContext>(options => options.UseSqlite(cons
 
 var app = builder.Build();
 
-app.UseDeveloperExceptionPage();
-app.UseHttpsRedirection();
+if (app.Environment.IsProduction()) {
+	app.UseHttpsRedirection();
+}
+
+if (app.Environment.IsDevelopment()) {
+	app.UseDeveloperExceptionPage();
+}
+
 app.UseStaticFiles();
 app.UseRouting();
 app.MapRazorPages();
