@@ -25,6 +25,8 @@
 		.skipnav { margin-bottom: 8px; }
 		.skipnav a { position: absolute; left: -10px; width: 0; height: 0; overflow: hidden; }
 		.skipnav a:focus, .skipnav a:active { position: static; left: 0; width: auto; height: auto; overflow: visible; }
+		.validation-summary-errors { margin-top: 24px; }
+		.validation-summary-errors ul li { list-style-type: disc; margin: 16px; }
 	</style>
 </head>
 <body>
@@ -32,8 +34,8 @@
 
 	<header role="banner">
 		<form action="/search" method="GET" role="search">
-			<label for="query">Search</label>
-			<input type="search" id="query" name="query">
+			<label for="search">Search</label>
+			<input type="search" id="search" name="search">
 			<button>Find</button>
 		</form>
 	</header>

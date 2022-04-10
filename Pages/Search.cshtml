@@ -1,18 +1,18 @@
 @page
 @model SearchModel
 
-@if (string.IsNullOrEmpty(@Model.SearchError)) {
-	<h1>Search results for &ldquo; @Model.SearchText &rdquo;</h1>
-	@if (@Model.SearchResult.Any()) {
+@if (@Model.ModelState.IsValid) {
+	<h1>Search results for &ldquo; @Model.ListRequest.Search &rdquo;</h1>
+	@if (@Model.ListResponse.Any()) {
 		<ul class="search-results">
-		@foreach (var item in @Model.SearchResult)
+		@foreach (var item in @Model.ListResponse)
 		{
 			<li>
-				<a href="/Details?id=@item.Id">@item.Name</a>
+				<a href="/details?id=@item.Id">@item.Name</a>
 				<code>
-				@foreach (var tag in item.TagRefs.Select(x => x.Tag.Name).OrderBy(x => x))
+				@foreach (var tag in item.Tags)
 				{
-					<small>@tag</small>
+					<small>@tag.Name</small>
 				}
 				</code>
 			</li>
@@ -25,6 +25,8 @@
 	}
 }
 
-@if (!string.IsNullOrEmpty(@Model.SearchError)) {
-	<p id="search_error">@Model.SearchError</p>
+@if (!@Model.ModelState.IsValid) {
+	<div asp-validation-summary="All">
+    	<span>Please correct the following errors</span>
+	</div>
 }

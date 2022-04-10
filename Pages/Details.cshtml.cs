@@ -1,27 +1,22 @@
 using librawry.portable;
-using librawry.portable.entities;
+using librawry.portable.repo.titles;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 
 namespace librawry.Pages {
 	public class DetailsModel : PageModel {
-		private readonly LibrawryContext db;
+		private readonly IUnitOfWork unitOfWork;
 
-		public DetailsModel(LibrawryContext db) {
-			this.db = db;
+		public DetailsModel(IUnitOfWork unitOfWork) {
+			this.unitOfWork = unitOfWork;
 		}
 
-		public Title DetailsResult {
+		public DetailsResponse DetailsResult {
 			get; private set;
 		}
 
 		public async Task<IActionResult> OnGetAsync(int id) {
-			DetailsResult = await db.Titles
-				.Include("TagRefs.Tag")
-				.Include("Episodes")
-				.Where(x => x.Id == id)
-				.FirstOrDefaultAsync();
+			DetailsResult = await unitOfWork.TitleRepository.GetDetails(id);
 
 			if (DetailsResult == null) {
 				return NotFound();

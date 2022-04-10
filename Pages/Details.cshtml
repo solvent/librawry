@@ -6,9 +6,9 @@
 </h1>
 
 <code>
-@foreach (var tag in @Model.DetailsResult.TagRefs.Select(x => x.Tag.Name).OrderBy(x => x))
+@foreach (var tag in @Model.DetailsResult.Tags)
 {
-	<small>@tag</small>
+	<small>@tag.Name</small>
 }
 </code>
 
