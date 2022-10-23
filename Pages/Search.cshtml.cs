@@ -15,11 +15,11 @@ namespace librawry.Pages {
 		[BindProperty(SupportsGet = true)]
 		public ListRequest ListRequest {
 			get; set;
-		}
+		} = null!;
 
 		public IEnumerable<ListResponse> ListResponse {
 			get; private set;
-		}
+		} = Enumerable.Empty<ListResponse>();
 
 		public async Task OnGetAsync() {
 			if (ModelState.IsValid) {

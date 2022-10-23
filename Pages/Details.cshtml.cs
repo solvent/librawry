@@ -11,7 +11,7 @@ namespace librawry.Pages {
 			this.unitOfWork = unitOfWork;
 		}
 
-		public DetailsResponse DetailsResult {
+		public DetailsResponse? DetailsResult {
 			get; private set;
 		}
 

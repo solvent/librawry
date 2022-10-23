@@ -1,6 +1,8 @@
 @page
 @model DetailsModel
 
+@if (@Model.DetailsResult == null ) return;
+
 <h1>
 	@Model.DetailsResult.Name
 </h1>
