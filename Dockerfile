@@ -13,6 +13,5 @@ RUN dotnet publish -c Release -o /app -r linux-musl-x64 --self-contained false -
 # final stage/image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0-alpine
 WORKDIR /app
-COPY db/db.sqlite ./db/
 COPY --from=build /app .
 ENTRYPOINT ["dotnet", "librawry.dll"]

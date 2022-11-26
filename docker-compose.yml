@@ -1,0 +1,11 @@
+services:
+  librawry:
+    image: librawry:latest
+    ports:
+      - 8080:80
+    volumes:
+      - ./db:/app/db
+      - home:/root
+
+volumes:
+  home:

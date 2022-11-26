@@ -12,10 +12,6 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 
-if (app.Environment.IsProduction()) {
-	app.UseHttpsRedirection();
-}
-
 if (app.Environment.IsDevelopment()) {
 	app.UseDeveloperExceptionPage();
 }
